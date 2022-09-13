@@ -41,12 +41,11 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movies{" +
-                "name='" + name + '\'' +
-                ", year=" + year +
-                ", description='" + description + '\'' +
-                ", director=" + director +
-                ", cast=" + cast +
-                '}';
+        return "\n:::::::::::::::::::::::::::MOVIE::::::::::::::::::::::::::::::"+
+                "\nname - " + name +
+                "\nyear - " + year +
+                "\ndescription - " + description +
+                "\n" + director.toString()+
+                "\n:::::::::::::CAST::::::::::::::::::\n" + cast.toString() +"\n--------------------------------------------";
     }
 }

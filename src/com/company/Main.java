@@ -1,21 +1,22 @@
 package com.company;
 
-import com.company.models.Movie;
+import com.company.services.impl.FindAbleImpl;
+import com.company.services.impl.SortAbleImpl;
 
-import java.util.List;
 import java.util.Scanner;
-
 public class Main {
 
-    private static Scanner in = new Scanner(System.in);
+     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        
+
+logika();
+
     }
 
 
     static void commands() {
-        System.out.println("--------------Commands-----------------------");
+        System.out.println("\n--------------Commands-----------------------");
         System.out.println("Press 1 to print catalog");
         System.out.println("Press 2 to Find a Movie by full or part name");
         System.out.println("Press 3 to sort by year");
@@ -30,7 +31,48 @@ public class Main {
     }
 
     static String button(){
-        System.out.println("Choose a command: ");
-        return in.nextLine();
+        System.out.print("Choose a command: ");
+        return scanner.nextLine();
+    }
+    static  void logika() {
+        Scanner scanner = new Scanner(System.in);
+        SortAbleImpl sortAble = new SortAbleImpl();
+        FindAbleImpl findAble = new FindAbleImpl();
+        String number = "l";
+
+        while (!number.equals("x")) {
+            commands();
+            System.err.print("\nВыберите цифру от 1 до 10 (если хотите остонавить нажмите 'х') :");
+            number = scanner.nextLine();
+            try {
+
+
+                if (Character.isDigit(number.charAt(0))) {
+                    switch (number) {
+                        case "1" -> sortAble.printAllMovies();
+                        case "2" -> sortAble.findMovie();
+                        case "3" -> sortByYear();
+                        case "4" -> sortAble.sortByName();
+                        case "5" -> sortAble.sortByDirector();
+                        case "6" -> findAble.findMoviesByActor();
+                        case "7" -> findAble.findMoviesByDirector();
+                        case "8" -> findAble.findMoviesByYear();
+                        case "9" -> findAble.findMoviesAndRoleByActor();
+                        case "10" -> findAble.showActorRoles();
+                    }
+                } else{
+                    throw new RuntimeException();
+                }
+            }catch (RuntimeException e){
+
+            }
+        }
+    }
+
+    static void sortByYear(){
+        SortAbleImpl sortAble = new SortAbleImpl();
+        System.out.println("from lower to higher '1' : ");
+        System.out.println("high to low '2' :");
+        sortAble.sortByYear(scanner.nextInt());
     }
 }
