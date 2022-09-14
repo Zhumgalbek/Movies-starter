@@ -1,12 +1,11 @@
 package com.company.services.impl;
 
 import com.company.JsonIO;
+import com.company.models.Cast;
 import com.company.models.Movie;
 import com.company.services.FindAble;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class FindAbleImpl implements FindAble {
 
@@ -91,34 +90,56 @@ public class FindAbleImpl implements FindAble {
     @Override
     public void showActorRoles() {
         List<Movie> movies = JsonIO.getMovies();
-        for (int i = 0 ; i < movies.size(); i++) {
-            Comparator<Movie> comparator = new Comparator<Movie>() {
+        TreeSet<Cast> treeSet = new TreeSet<>();
+        System.out.println("from lower to higher '1' : ");
+        System.out.println("high to low '2' :");
+        String number = in.nextLine();
 
-                @Override
-                public int compare(Movie o1, Movie o2) {
-                    int a = -1;
-                    a++;
-                    return o1.getCast().get(a).getRole().compareTo(o2.getCast().get(a).getRole());
-
+        for (int i = 0; i < movies.size(); i++) {
+            treeSet.addAll( JsonIO.getMovies().get(i).getCast());
+        }
+        if (number.charAt(0)=='2') {
+            for (Cast cast : treeSet) {
+                System.out.println("__________________________________________");
+                System.out.println("actor name : "+cast.getFullName());
+                for (int i = 0; i < movies.size(); i++) {
+                    for (int j = 0; j < movies.get(i).getCast().size(); j++) {
+                        if (cast.getFullName().equals(movies.get(i).getCast().get(j).getFullName())){
+                            System.out.println("movies name : "+movies.get(i).getName());
+                            System.out.println("role : "+movies.get(i).getCast().get(j).getRole());
+                        }
+                    }
                 }
-            }; movies.sort(comparator);
-            for (Movie k:movies) {
-                    System.out.println("-----------------------------");
-                    System.out.println("actor : "+k.getCast().get(i).getFullName());
-                    System.out.println("role : "+k.getCast().get(i).getRole());
+            }
+
+        }
+        TreeSet<Cast> castTreeSet = (TreeSet<Cast>) treeSet.descendingSet();
+        if (number.charAt(0)=='1'){
+            for (Cast cast: castTreeSet) {
+                System.out.println("__________________________________________");
+                System.out.println("actor name : "+cast.getFullName());
+                for (int i = 0; i < movies.size(); i++) {
+                    for (int j = 0; j < movies.get(i).getCast().size(); j++) {
+                        if (cast.getFullName().equals(movies.get(i).getCast().get(j).getFullName())){
+                            System.out.println("movies name : "+movies.get(i).getName());
+                            System.out.println("role : "+movies.get(i).getCast().get(j).getRole());
+                        }
+                    }
+                }
             }
 
         }
 
 
-
-
-            }
-
-
-
-
+    }
 }
+
+
+
+
+
+
+
 
 
 

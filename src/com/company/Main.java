@@ -29,7 +29,6 @@ logika();
         System.out.println("Press 10 to sorted List of all actors with his roles");
         System.out.println("---------------------------------------------");
     }
-
     static String button(){
         System.out.print("Choose a command: ");
         return scanner.nextLine();
@@ -68,7 +67,6 @@ logika();
             }
         }
     }
-
     static void sortByYear(){
         SortAbleImpl sortAble = new SortAbleImpl();
         System.out.println("from lower to higher '1' : ");

@@ -22,7 +22,7 @@ public class SortAbleImpl implements SortAble {
 
     @Override
     public void findMovie() {
-        System.out.println("write movie name : ");
+        System.err.println("называния фильма : ");
         String moveName = in.nextLine().trim();
         List<Movie> movies = JsonIO.getMovies();
         if (moveName.length()>0){
@@ -88,8 +88,8 @@ public class SortAbleImpl implements SortAble {
         List<Movie> list = JsonIO.getMovies();
         System.out.println("from lower to higher '1' : ");
         System.out.println("high to low '2' :");
-        int next = in.nextInt();
-        if (next==1){
+        String next = in.nextLine();
+        if (next.equals("1")){
             Comparator<Movie> comparator = new Comparator<Movie>() {
                 @Override
                 public int compare(Movie o1, Movie o2) {
@@ -101,7 +101,7 @@ public class SortAbleImpl implements SortAble {
                 System.out.println("-----------------------------");
                 System.out.println(i);
             }
-        }if (next==2){
+        }if (next.equals("2")){
             Comparator<Movie> comparator = new Comparator<Movie>() {
                 @Override
                 public int compare(Movie o1, Movie o2) {
@@ -127,19 +127,20 @@ public class SortAbleImpl implements SortAble {
         int next = in.nextInt();
 
 
-            if (next==1){
-                Comparator<Movie> comparator = new Comparator<Movie>() {
-                    @Override
-                    public int compare(Movie o1, Movie o2) {
-                        return o2.getDirector().getFullName().compareTo(o1.getDirector().getFullName());
-                    }
-                };
-                list.sort(comparator);
-                for (Movie i:list) {
-                    System.out.println("-----------------------------");
-                    System.out.println(i);
+        if (next == 1) {
+            Comparator<Movie> comparator = new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return o2.getDirector().getFullName().compareTo(o1.getDirector().getFullName());
                 }
-            }if (next==2){
+            };
+            list.sort(comparator);
+            for (Movie i : list) {
+                System.out.println("-----------------------------");
+                System.out.println(i);
+            }
+        } else {System.err.println("тут нету такого символа");
+    }if (next==2){
                 Comparator<Movie> comparator = new Comparator<Movie>() {
                     @Override
                     public int compare(Movie o1, Movie o2) {
